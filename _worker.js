@@ -417,7 +417,7 @@ async function getLink(重新汇总所有链接) {
 				method: 'get',
 				headers: {
 					'Accept': 'text/html,application/xhtml+xml,application/xml;',
-					'User-Agent': 'v2rayN/' + FileName + ' (https://github.com/cmliu/WorkerVless2sub)'
+					'User-Agent': 'v2rayN/' + FileName + ' (https://github.com/cmliu/Workervness2sub)'
 				},
 				signal: controller.signal // 将AbortController的信号量添加到fetch请求中
 			}).then(response => response.ok ? response.text() : Promise.reject())));
@@ -768,7 +768,7 @@ async function subHtml(request) {
 				<script src="https://cdn.jsdelivr.net/npm/@keeex/qrcodejs-kx@1.0.2/qrcode.min.js"></script>
 			</head>
 			<body>
-				<a href="https://github.com/cmliu/WorkerVless2sub" target="_blank" class="github-corner" aria-label="View source on Github">
+				<a href="https://github.com/cmliu/Workervness2sub" target="_blank" class="github-corner" aria-label="View source on Github">
 					<svg viewBox="0 0 250 250" aria-hidden="true">
 						<path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
 						<path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
@@ -782,7 +782,7 @@ async function subHtml(request) {
 						</div>
 					<div class="input-group">
 						<label for="link">节点链接</label>
-						<input type="text" id="link" placeholder="请输入 VMess / VLESS / Trojan 链接">
+						<input type="text" id="link" placeholder="请输入 vwess / vness / Projan 链接">
 					</div>
 					
 					<button onclick="generateLink()">生成优选订阅</button>
@@ -865,19 +865,19 @@ async function subHtml(request) {
 						if (是特洛伊) uuidType = 'password';
 						let subLink = '';
 						try {
-							const isVMess = link.startsWith('vmess://');
-							if (isVMess){
-								const vmessLink = link.split('vmess://')[1];
-								const vmessJson = JSON.parse(atob(vmessLink));
+							const isvwess = link.startsWith('vmess://');
+							if (isvwess){
+								const vwessLink = link.split('vmess://')[1];
+								const vwessJson = JSON.parse(atob(vwessLink));
 								
-								const host = vmessJson.host;
-								const uuid = vmessJson.id;
-								const path = vmessJson.path || '/';
-								const sni = vmessJson.sni || host;
-								const type = vmessJson.type || 'none';
-								const alpn = vmessJson.alpn || '';
-								const alterId = vmessJson.aid || 0;
-								const security = vmessJson.scy || 'auto';
+								const host = vwessJson.host;
+								const uuid = vwessJson.id;
+								const path = vwessJson.path || '/';
+								const sni = vwessJson.sni || host;
+								const type = vwessJson.type || 'none';
+								const alpn = vwessJson.alpn || '';
+								const alterId = vwessJson.aid || 0;
+								const security = vwessJson.scy || 'auto';
 								const domain = window.location.hostname;
 								
 								subLink = \`https://\${domain}/sub?host=\${host}&uuid=\${uuid}&path=\${encodeURIComponent(path)}&sni=\${sni}&type=\${type}&alpn=\${encodeURIComponent(alpn)}&alterid=\${alterId}&security=\${security}\`;
@@ -1073,7 +1073,7 @@ export default {
 			获取代理IP = url.searchParams.get('proxyip') || 'false';
 
 			if (url.searchParams.has('alterid')) {
-				协议类型 = 'VMess';
+				协议类型 = 'vwess';
 				额外ID = url.searchParams.get('alterid') || 额外ID;
 				加密方式 = url.searchParams.get('security') || 加密方式;
 			} else if (url.searchParams.has(atob('ZWRnZXR1bm5lbA==')) || url.searchParams.has('uuid')) {
@@ -1161,7 +1161,7 @@ export default {
 		} else if ((userAgent.includes('clash') || userAgent.includes('meta') || userAgent.includes('mihomo') || (format === 'clash' && !isSubConverterRequest)) && !userAgent.includes('nekobox') && !userAgent.includes('cf-workers-sub')) {
 			subConverterUrl = `${subProtocol}://${subConverter}/sub?target=clash&url=${encodeURIComponent(subConverterUrl)}&insert=false&config=${encodeURIComponent(subConfig)}&emoji=true&list=false&tfo=false&scv=${scv}&fdn=false&sort=false&new_name=true`;
 		} else if ((userAgent.includes('sing-box') || userAgent.includes('singbox') || (format === 'singbox' && !isSubConverterRequest)) && !userAgent.includes('cf-workers-sub')) {
-			if (协议类型 == 'VMess' && url.href.includes('path=')) {
+			if (协议类型 == 'vwess' && url.href.includes('path=')) {
 				const 路径参数前部分 = url.href.split('path=')[0];
 				const parts = url.href.split('path=')[1].split('&');
 				const 路径参数后部分 = parts.slice(1).join('&') || '';
@@ -1199,7 +1199,7 @@ export default {
 			const uniqueAddresses = Array.from(new Set(addresses.concat(newAddressesapi, newAddressescsv).filter(item => item && item.trim())));
 
 			let notlsresponseBody;
-			if ((noTLS == 'true' && 协议类型 == atob(`\u0056\u006b\u0078\u0046\u0055\u0031\u004d\u003d`)) || 协议类型 == 'VMess') {
+			if ((noTLS == 'true' && 协议类型 == atob(`\u0056\u006b\u0078\u0046\u0055\u0031\u004d\u003d`)) || 协议类型 == 'vwess') {
 				const newAddressesnotlsapi = await 整理优选列表(addressesnotlsapi);
 				const newAddressesnotlscsv = await 整理测速结果('FALSE');
 				const uniqueAddressesnotls = Array.from(new Set(addressesnotls.concat(newAddressesnotlsapi, newAddressesnotlscsv).filter(item => item && item.trim())));
@@ -1279,9 +1279,9 @@ export default {
 						}
 					}
 
-					if (协议类型 == 'VMess') {
-						const vmessLink = `vmess://${utf8ToBase64(`{"v":"2","ps":"${addressid + EndPS}","add":"${address}","port":"${port}","id":"${uuid}","aid":"${额外ID}","scy":"${加密方式}","net":"ws","type":"${type}","host":"${host}","path":"${path}","tls":"","sni":"","alpn":"${encodeURIComponent(alpn)}","fp":""}`)}`;
-						return vmessLink;
+					if (协议类型 == 'vwess') {
+						const vwessLink = `vmess://${utf8ToBase64(`{"v":"2","ps":"${addressid + EndPS}","add":"${address}","port":"${port}","id":"${uuid}","aid":"${额外ID}","scy":"${加密方式}","net":"ws","type":"${type}","host":"${host}","path":"${path}","tls":"","sni":"","alpn":"${encodeURIComponent(alpn)}","fp":""}`)}`;
+						return vwessLink;
 					} else {
 						const 为烈士Link = `${atob(atob('ZG14bGMzTTZMeTg9')) + uuid}@${address}:${port}?security=&type=${type}&host=${host}&path=${encodeURIComponent(path)}&encryption=none#${encodeURIComponent(addressid + EndPS)}`;
 						return 为烈士Link;
@@ -1378,9 +1378,9 @@ export default {
 					sni = 伪装域名;
 				}
 
-				if (协议类型 == 'VMess') {
-					const vmessLink = `vmess://${utf8ToBase64(`{"v":"2","ps":"${addressid + 节点备注}","add":"${address}","port":"${port}","id":"${uuid}","aid":"${额外ID}","scy":"${加密方式}","net":"ws","type":"${type}","host":"${伪装域名}","path":"${最终路径}","tls":"tls","sni":"${sni}","alpn":"${encodeURIComponent(alpn)}","fp":"","allowInsecure":"${scv == 'true' ? '1' : '0'}","fragment":"1,40-60,30-50,tlshello"}`)}`;
-					return vmessLink;
+				if (协议类型 == 'vwess') {
+					const vwessLink = `vmess://${utf8ToBase64(`{"v":"2","ps":"${addressid + 节点备注}","add":"${address}","port":"${port}","id":"${uuid}","aid":"${额外ID}","scy":"${加密方式}","net":"ws","type":"${type}","host":"${伪装域名}","path":"${最终路径}","tls":"tls","sni":"${sni}","alpn":"${encodeURIComponent(alpn)}","fp":"","allowInsecure":"${scv == 'true' ? '1' : '0'}","fragment":"1,40-60,30-50,tlshello"}`)}`;
+					return vwessLink;
 				} else if (协议类型 == atob('VHJvamFu')) {
 					const 特洛伊Link = `${atob(atob('ZEhKdmFtRnVPaTh2')) + uuid}@${address}:${port}?security=tls&sni=${sni}&alpn=${encodeURIComponent(alpn)}&fp=random&type=${type}&host=${伪装域名}&path=${encodeURIComponent(最终路径) + (scv == 'true' ? '&allowInsecure=1' : '')}&fragment=${encodeURIComponent('1,40-60,30-50,tlshello')}#${encodeURIComponent(addressid + 节点备注)}`;
 					return 特洛伊Link;
@@ -1463,3 +1463,4 @@ export default {
 		}
 	}
 };
+
